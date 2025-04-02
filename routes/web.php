@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AlumnoController;
 use App\Http\Controllers\DocenteController;
+use App\Http\Controllers\SeccionController;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
@@ -11,6 +13,14 @@ Route::get('/', function () {
 })->name('home');
 
 Route::resource('docente', DocenteController::class);
+
+Route::resource('seccion', SeccionController::class);
+
+Route::post('alumno/{alumno}/actualizar', [AlumnoController::class, 'actualizarSeccionesAlumno'])
+    ->name('alumno.actualizar-secciones')
+    ->middleware(['auth']);
+
+Route::resource('alumno', AlumnoController::class)->middleware(['auth']);
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])

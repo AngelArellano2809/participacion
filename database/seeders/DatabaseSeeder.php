@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Alumno;
 use App\Models\Docente;
 use App\Models\Seccion;
 use App\Models\User;
@@ -22,7 +23,9 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         Docente::factory(10)
-            ->has(Seccion::factory()->count(3))
+            ->has(Seccion::factory()->count(3), 'secciones')
             ->create();
+
+        Alumno::factory(10)->create();
     }
 }
